@@ -12,13 +12,13 @@ int citire_graf(char numefisier[], int* nr_vrf, int* nr_muchii, int*** g)
 
 	fscanf(f, "%d %d", nr_vrf, nr_muchii);
 
-	*g = (int**)malloc(*nr_muchii * sizeof(int*));
+	*g = (int**)malloc(*nr_muchii * sizeof(int*)); //stabilesc cate linii sunt pt muchii, creez scheletul
 
 	for (int i = 0; i < *nr_muchii; i++)
-		(*g)[i] = (int*)malloc(2 * sizeof(int));
+		(*g)[i] = (int*)malloc(2 * sizeof(int)); // fac loc pt 2 muchii 
 
 	for (int i = 0; i < *nr_muchii; i++)
-		fscanf(f, "%d %d", &(*g)[i][0], &(*g)[i][1]);
+		fscanf(f, "%d %d", &(*g)[i][0], &(*g)[i][1]); // pune valorile respective in locul lor
 
 	fclose(f);
 
@@ -46,3 +46,17 @@ void main()
 		printf("%d %d\n", tabel[i][0], tabel[i][1]);
 
 }
+
+/*
+* 1. malloc 1
+
+👉 creezi rândurile (muchii)
+
+2. malloc 2
+
+👉 creezi fiecare muchie (2 noduri)
+
+3. fscanf
+
+👉 umpli valorile
+*/
