@@ -1,0 +1,48 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<malloc.h>
+
+int citire_graf(char numefisier[], int* nr_vrf, int* nr_muchii, int*** g)
+{
+	FILE* f;
+
+	f = fopen(numefisier, "r");
+	if (f == NULL)
+		return 1;
+
+	fscanf(f, "%d %d", nr_vrf, nr_muchii);
+
+	*g = (int**)malloc(*nr_muchii * sizeof(int*));
+
+	for (int i = 0; i < *nr_muchii; i++)
+		(*g)[i] = (int*)malloc(2 * sizeof(int));
+
+	for (int i = 0; i < *nr_muchii; i++)
+		fscanf(f, "%d %d", &(*g)[i][0], &(*g)[i][1]);
+
+	fclose(f);
+
+	return 0;
+}
+
+void main()
+{
+	char numefisier[20];
+	int n, m, ** tabel, er;
+
+	printf("Introduecti fisierul din care cititi graful:");
+	gets_s(numefisier);
+
+	er = citire_graf(numefisier, &n, &m, &tabel);
+
+	printf("Numarul de varfuri este:%d", n);
+	printf("\n");
+
+	printf("Numarul de muchii este:%d", m);
+	printf("\n");
+
+	printf("Muchiile sunt:\n");
+	for (int i = 0; i < m; i++)
+		printf("%d %d\n", tabel[i][0], tabel[i][1]);
+
+}
